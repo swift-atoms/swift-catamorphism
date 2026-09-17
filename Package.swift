@@ -3,31 +3,31 @@ import CompilerPluginSupport
 import PackageDescription
 
 let package = Package(
-    name: "swift-catamorphism-derivation",
+    name: "swift-catamorphism",
     products: [
-        .library(name: "Catamorphism Derivation", targets: ["Catamorphism Derivation"]),
-        .library(name: "Catamorphism Derivation Core", targets: ["Catamorphism Derivation Core"]),
+        .library(name: "Catamorphism Macro", targets: ["Catamorphism Macro"]),
+        .library(name: "Catamorphism Macro Core", targets: ["Catamorphism Macro Core"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-molecules/swift-recursive-derivation.git", branch: "main"),
+        .package(url: "https://github.com/swift-molecules/swift-recursive.git", branch: "main"),
         .package(url: "https://github.com/swiftlang/swift-syntax.git", "603.0.2"..<"604.0.0"),
     ],
     targets: [
-        .target(name: "Catamorphism Derivation Core", dependencies: [
-            .product(name: "Recursive Derivation Core", package: "swift-recursive-derivation"),
+        .target(name: "Catamorphism Macro Core", dependencies: [
+            .product(name: "Recursive Macro Core", package: "swift-recursive"),
             .product(name: "SwiftSyntax", package: "swift-syntax"),
             .product(name: "SwiftSyntaxBuilder", package: "swift-syntax"),
         ]),
-        .macro(name: "Catamorphism Derivation Macros", dependencies: [
-            "Catamorphism Derivation Core",
+        .macro(name: "Catamorphism Macro Plugin", dependencies: [
+            "Catamorphism Macro Core",
             .product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
             .product(name: "SwiftSyntax", package: "swift-syntax"),
             .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
         ]),
-        .target(name: "Catamorphism Derivation", dependencies: ["Catamorphism Derivation Macros"]),
+        .target(name: "Catamorphism Macro", dependencies: ["Catamorphism Macro Plugin"]),
         .testTarget(
-            name: "Catamorphism Derivation Tests",
-            dependencies: ["Catamorphism Derivation"]
+            name: "Catamorphism Macro Tests",
+            dependencies: ["Catamorphism Macro"]
         ),
     ],
     swiftLanguageModes: [.v6]

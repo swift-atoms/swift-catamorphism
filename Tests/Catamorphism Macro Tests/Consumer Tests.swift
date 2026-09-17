@@ -1,4 +1,4 @@
-import Catamorphism_Derivation
+import Catamorphism_Macro
 import Testing
 
 @Catamorphism
