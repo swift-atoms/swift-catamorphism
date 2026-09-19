@@ -1,6 +1,10 @@
+import Functor_Base_Macro
+import Recursive_Macro
 import Catamorphism_Macro
 import Testing
 
+@FunctorBase
+@Recursive
 @Catamorphism
 private indirect enum Natural {
     case zero
