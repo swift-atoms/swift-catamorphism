@@ -1,6 +1,6 @@
+import Catamorphism_Macro
 import Functor_Base_Macro
 import Recursive_Macro
-import Catamorphism_Macro
 import Testing
 
 @FunctorBase
@@ -17,7 +17,7 @@ func `catamorphism folds from leaves to root`() {
     let count = two.catamorphism { (layer: Natural.Base<Int>) -> Int in
         switch layer {
         case .zero: 0
-        case let .successor(child): child + 1
+        case .successor(let child): child + 1
         }
     }
     #expect(count == 2)

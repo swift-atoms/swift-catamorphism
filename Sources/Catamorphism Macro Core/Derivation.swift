@@ -5,14 +5,17 @@ public enum Derivation {}
 
 extension Derivation {
     public static func expansion(of declaration: EnumDeclSyntax) -> [DeclSyntax] {
-        let access = declaration.modifiers.contains { $0.name.tokenKind == .keyword(.public) }
+        let access =
+            declaration.modifiers.contains { $0.name.tokenKind == .keyword(.public) }
             ? "public " : ""
-        return ["""
+        return [
+            """
             \(raw: access)func catamorphism<Result>(
                 _ algebra: (Base<Result>) -> Result
             ) -> Result {
                 algebra(project().map { $0.catamorphism(algebra) })
             }
-            """]
+            """
+        ]
     }
 }
